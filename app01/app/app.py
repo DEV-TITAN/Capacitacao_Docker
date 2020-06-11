@@ -12,7 +12,7 @@ def index():
    if request.method == 'POST':
       nome = request.form['nome']
       mail = request.form['email']
-      #requests.post('http://app02:5000/mail',{'nome':nome,'mail':mail})
+      requests.post('http://app02:5000/mail',{'nome':nome,'mail':mail})
       return redirect(url_for('.thanks', nome = nome))
    return render_template('index.html')
 
