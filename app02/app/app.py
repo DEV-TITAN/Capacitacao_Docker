@@ -9,7 +9,8 @@ app = Flask(__name__)
 def root():
     if request.method == 'POST':
         request_json = request.get_json()
-        gmail_user = 'guilhermeedington@gmail.com'
+        print("Recebido: "+str(request.get_data()))
+        gmail_user = open('email.txt','r').read()
         gmail_pass = open('senha.pass','r').read()
         gmail_server = 'smtp.gmail.com'
         gmail_port = 587
@@ -25,10 +26,12 @@ def root():
         mail_html = mail_html.replace("!!NOME!!",request_json["nome"])
         mail_message = MIMEText(mail_html,"html")
         mail.attach(mail_message)
+        print('Enviando Email...')
         with smtplib.SMTP(gmail_server, gmail_port) as server:
             server.starttls()
             server.login(gmail_user, gmail_pass)
             server.sendmail(gmail_user, request_json["mail"], mail.as_string())
+        print("Enviado!")
         return '200'
     else:
         abort(400)
