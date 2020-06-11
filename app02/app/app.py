@@ -9,7 +9,7 @@ app = Flask(__name__)
 def root():
     if request.method == 'POST':
         request_json = request.get_json()
-        gmail_user = 'guilhermeedington@gmail.com.br'
+        gmail_user = 'guilhermeedington@gmail.com'
         gmail_pass = open('senha.pass','r').read()
         gmail_server = 'smtp.gmail.com'
         gmail_port = 587
@@ -29,6 +29,7 @@ def root():
             server.starttls()
             server.login(gmail_user, gmail_pass)
             server.sendmail(gmail_user, request_json["mail"], mail.as_string())
+        return '200'
     else:
         abort(400)
 
