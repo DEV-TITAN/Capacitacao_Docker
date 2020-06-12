@@ -1,0 +1,16 @@
+version: '3'
+services:
+  app01:
+    image: app01:1.0
+    networks:
+      - net
+    ports:
+      - 8080:5000 
+  
+  app02:
+    image: app02:1.0
+    networks:
+      - net
+
+networks:
+  net:
